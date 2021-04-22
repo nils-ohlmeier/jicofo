@@ -2144,8 +2144,7 @@ public class JitsiMeetConferenceImpl
 
             if (this.chatRoom.getIsAudioModerationEnabled() && !toBeMutedMember.getIsAudioModerationException())
             {
-                logger.warn("Blocking unmute for force muted participant" +
-                    " with jid: " + toBeMutedJid);
+                logger.warn("Blocking unmute for force muted participant" + " with jid: " + toBeMutedJid);
                 return false;
             }
         }
@@ -2167,14 +2166,30 @@ public class JitsiMeetConferenceImpl
 
         logger.info("Will " + (doMute ? "mute" : "unmute") + " " + toBeMutedJid + " on behalf of " + fromJid);
 
-        return muteParticipantBridgeChannel(toBeMutedJid, doMute, mediaType);
+        return muteParticipantBridgeChannel(participant, doMute, mediaType);
     }
 
     /**
+     * Mutes/unmutes a participant specified by its jid bridge channel for a media type.
      */
     public boolean muteParticipantBridgeChannel(Jid jid, boolean doMute, MediaType mediaType)
     {
         Participant participant = findParticipantForRoomJid(jid);
+
+        if (participant == null)
+        {
+            logger.trace("Participant " + jid + " not found for " + (doMute ? "mute" : "unmute"));
+            return false;
+        }
+
+        return this.muteParticipantBridgeChannel(participant, doMute, mediaType);
+    }
+
+    /**
+     * Mutes/unmutes participant's bridge channel for a media type.
+     */
+    public boolean muteParticipantBridgeChannel(Participant participant, boolean doMute, MediaType mediaType)
+    {
         BridgeSession bridgeSession = findBridgeSession(participant);
         ColibriConferenceIQ participantChannels = participant.getColibriChannelsInfo();
 

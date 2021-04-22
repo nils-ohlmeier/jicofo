@@ -859,10 +859,14 @@ public class ChatRoomImpl
         }
     }
 
+    /**
+     * Refreshes the room configuration by requesting it from the xmpp server.
+     */
     private void refreshConfiguration()
     {
         try
         {
+            // this is blocking call
             Form config = mucManager.getRoomInfo(muc.getRoom()).getForm();
             List<FormField> fields = config.getFields();
 
@@ -954,7 +958,7 @@ public class ChatRoomImpl
     }
 
     /**
-     *
+     * Listens for incoming messages indicating room configuration changes.
      */
     @Override
     public void processMessage(org.jivesoftware.smack.packet.Message message)
@@ -974,7 +978,7 @@ public class ChatRoomImpl
         {
             if (status.getCode() == ROOM_CONFIGURATION_CHANGED_104.getCode())
             {
-                logger.info("!! Room configuration changed!");
+                logger.trace("Room configuration changed!");
                 refreshConfiguration();
 
                 return;
