@@ -348,6 +348,7 @@ public class ChatRoomImpl
 
             muc.removeParticipantStatusListener(memberListener);
             muc.removeParticipantListener(this);
+            muc.removeMessageListener(this);
 
             if (leaveCallback != null)
             {
