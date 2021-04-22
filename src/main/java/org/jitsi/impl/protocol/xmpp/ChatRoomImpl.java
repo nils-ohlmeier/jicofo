@@ -883,17 +883,19 @@ public class ChatRoomImpl
 
             // build exception lookup for incoming state
             HashMap<EntityFullJid, Boolean> exceptions = new HashMap<>();
-            exceptionList.get().getValues().stream()
-                .map(jid -> {
-                    try {
-                        return JidCreate.entityFullFrom(jid);
-                    } catch (Exception e) {
-                        return null;
-                    }
-                })
-                .filter(Objects::nonNull)
-                .filter(jid -> members.containsKey(jid))
-                .forEach(jid -> exceptions.put(jid, true));
+            exceptionList.get().getValues().stream().map(jid -> {
+                try
+                {
+                    return JidCreate.entityFullFrom(jid);
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            })
+            .filter(Objects::nonNull)
+            .filter(jid -> members.containsKey(jid))
+            .forEach(jid -> exceptions.put(jid, true));
 
             // get incoming moderationenabled value
             boolean moderationEnabledValue = false;
@@ -925,8 +927,7 @@ public class ChatRoomImpl
                         continue;
                     }
 
-                    if ((wasEnabled && !isEnabled)
-                    || (wasEnabled && isEnabled && !wasException && isException))
+                    if ((wasEnabled && !isEnabled) || (wasEnabled && isEnabled && !wasException && isException))
                     {
                         logger.info("unmuting participant: " + jid);
                         this.conference.muteParticipantBridgeChannel(jid, false, MediaType.AUDIO);
@@ -938,10 +939,7 @@ public class ChatRoomImpl
 
             this.isAudioModerationEnabled = moderationEnabledValue;
         }
-        catch ( InterruptedException
-            | NoResponseException
-            | NotConnectedException
-            | XMPPException e)
+        catch ( InterruptedException | NoResponseException | NotConnectedException | XMPPException e)
         {
             logger.info("!! exception: " +  e.toString());
             logger.error("Failed to get configuration form", e);
@@ -954,18 +952,19 @@ public class ChatRoomImpl
     @Override
     public void processMessage(org.jivesoftware.smack.packet.Message message)
     {
-        if (message == null || message.getError() != null){
+        if (message == null || message.getError() != null)
+        {
             return;
         }
 
-        MUCUser mucUser = message.getExtension("x",
-            "http://jabber.org/protocol/muc#user");
+        MUCUser mucUser = message.getExtension("x", "http://jabber.org/protocol/muc#user");
         if (mucUser == null)
         {
             return;
         }
 
-        for (MUCUser.Status status: mucUser.getStatus()) {
+        for (MUCUser.Status status: mucUser.getStatus())
+        {
             if (status.getCode() == ROOM_CONFIGURATION_CHANGED_104.getCode())
             {
                 logger.info("!! Room configuration changed!");

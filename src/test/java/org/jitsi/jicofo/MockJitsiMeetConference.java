@@ -86,7 +86,8 @@ public class MockJitsiMeetConference
     }
 
     @Override
-    public boolean muteParticipantBridgeChannel(Jid jid, boolean doMute, MediaType mediaType) {
+    public boolean muteParticipantBridgeChannel(Jid jid, boolean doMute, MediaType mediaType)
+    {
         return true;
     };
 }
