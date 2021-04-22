@@ -67,30 +67,6 @@ public enum ChatRoomMemberRole
      */
     OUTCAST("Outcast", "service.gui.chat.role.OUTCAST", 10);
 
-    public static ChatRoomMemberRole fromSmackRole(MUCRole smackRole, MUCAffiliation affiliation) {
-        if (affiliation != null) {
-            if (affiliation == MUCAffiliation.admin) {
-                return ChatRoomMemberRole.ADMINISTRATOR;
-            }
-
-            if (affiliation == MUCAffiliation.owner) {
-                return ChatRoomMemberRole.OWNER;
-            }
-        }
-
-        if (smackRole != null) {
-            if (smackRole == MUCRole.moderator) {
-                return ChatRoomMemberRole.MODERATOR;
-            }
-
-            if (smackRole == MUCRole.participant) {
-                return ChatRoomMemberRole.MEMBER;
-            }
-        }
-
-        return ChatRoomMemberRole.GUEST;
-    }
-
     /**
      * the name of this role.
      */

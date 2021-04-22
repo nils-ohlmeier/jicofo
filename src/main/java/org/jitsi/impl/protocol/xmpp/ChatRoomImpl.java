@@ -28,7 +28,6 @@ import org.jivesoftware.smack.SmackException.*;
 import org.jivesoftware.smack.packet.*;
 import org.jivesoftware.smack.packet.id.*;
 import org.jivesoftware.smackx.muc.*;
-import org.jivesoftware.smackx.muc.MultiUserChatException.*;
 import org.jivesoftware.smackx.muc.packet.*;
 import org.jivesoftware.smackx.xdata.*;
 import org.jxmpp.jid.*;
@@ -50,23 +49,30 @@ import static org.jitsi.impl.protocol.xmpp.ChatRoomMemberPresenceChangeEvent.*;
 public class ChatRoomImpl
     implements ChatRoom, PresenceListener, org.jivesoftware.smack.MessageListener
 {
-    static ChatRoomMemberRole smackRoleToScRole(MUCRole smackRole, MUCAffiliation affiliation) {
-        if (affiliation != null) {
-            if (affiliation == MUCAffiliation.admin) {
+    static ChatRoomMemberRole smackRoleToScRole(MUCRole smackRole, MUCAffiliation affiliation)
+    {
+        if (affiliation != null)
+        {
+            if (affiliation == MUCAffiliation.admin)
+            {
                 return ChatRoomMemberRole.ADMINISTRATOR;
             }
 
-            if (affiliation == MUCAffiliation.owner) {
+            if (affiliation == MUCAffiliation.owner)
+            {
                 return ChatRoomMemberRole.OWNER;
             }
         }
 
-        if (smackRole != null) {
-            if (smackRole == MUCRole.moderator) {
+        if (smackRole != null)
+        {
+            if (smackRole == MUCRole.moderator)
+            {
                 return ChatRoomMemberRole.MODERATOR;
             }
 
-            if (smackRole == MUCRole.participant) {
+            if (smackRole == MUCRole.participant)
+            {
                 return ChatRoomMemberRole.MEMBER;
             }
         }
