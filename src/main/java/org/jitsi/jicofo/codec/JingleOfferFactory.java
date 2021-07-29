@@ -148,6 +148,8 @@ public class JingleOfferFactory
 
         rtpDesc.setMedia("video");
 
+        rtpDesc.setMediaId(new MediaIDExtension("videotest"));
+
         if (config.tof.enabled())
         {
             // a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
@@ -410,6 +412,8 @@ public class JingleOfferFactory
         RtpDescriptionPacketExtension rtpDesc = new RtpDescriptionPacketExtension();
 
         rtpDesc.setMedia("audio");
+
+        rtpDesc.setMediaId(new MediaIDExtension("audiotest"));
 
         if (config.audioLevel.enabled())
         {
