@@ -396,6 +396,7 @@ public class ParticipantChannelAllocator extends AbstractChannelAllocator
                                         "mixedmslabel mixedlabel" + contentName + "0"));
                         ssrcCopy.addParameter(new ParameterPacketExtension("mslabel", "mixedmslabel"));
 
+                        ssrcCopy.addParameter(new ParameterPacketExtension("mediaid", "mediatest"));
                         // Mark 'jvb' as SSRC owner
                         SSRCInfoPacketExtension ssrcInfo = new SSRCInfoPacketExtension();
                         ssrcInfo.setOwner(SSRC_OWNER_JVB);

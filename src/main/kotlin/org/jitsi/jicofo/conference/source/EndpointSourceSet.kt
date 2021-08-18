@@ -18,6 +18,7 @@ package org.jitsi.jicofo.conference.source
 import org.jitsi.utils.MediaType
 import org.jitsi.xmpp.extensions.colibri.SourcePacketExtension
 import org.jitsi.xmpp.extensions.jingle.ContentPacketExtension
+import org.jitsi.xmpp.extensions.jingle.ParameterPacketExtension
 import org.jitsi.xmpp.extensions.jingle.RtpDescriptionPacketExtension
 import org.jitsi.xmpp.extensions.jingle.SourceGroupPacketExtension
 import org.jxmpp.jid.Jid
@@ -83,6 +84,7 @@ data class EndpointSourceSet(
                 // "description" elements, so this is reproduced here. I don't know which one is correct and/or used.
                 rtpDesc?.let {
                     rtpDesc.getChildExtensionsOfType(SourcePacketExtension::class.java).forEach { spe ->
+                        spe.addParameter(ParameterPacketExtension("mediaid", "testmedia"))
                         sources.add(Source(mediaType, spe))
                     }
                     rtpDesc.getChildExtensionsOfType(SourceGroupPacketExtension::class.java).forEach { sgpe ->

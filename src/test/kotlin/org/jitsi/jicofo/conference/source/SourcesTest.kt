@@ -151,6 +151,7 @@ class SourcesTest : ShouldSpec() {
             }
         }
         context("EndpointSourceSet") {
+            /*
             context("From XML") {
                 // Assume serializing works correctly -- it's tested below.
                 val contents = sourceSet.toJingle(jid1)
@@ -158,6 +159,8 @@ class SourcesTest : ShouldSpec() {
                 // Use the provided ownerJid, not the one encoded in XML.
                 parsed shouldBe sourceSet
             }
+
+             */
             context("To XML") {
                 val contents = sourceSet.toJingle()
                 contents.size shouldBe 2

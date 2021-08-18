@@ -1651,7 +1651,7 @@ public class JitsiMeetConferenceImpl
             logger.info(participant + " did not advertise any SSRCs. Injecting " + ssrc);
             sourcesAdvertised
                     = new EndpointSourceSet(
-                            new Source(ssrc, MediaType.AUDIO, null, null, true));
+                            new Source(ssrc, MediaType.AUDIO, null, null, "initid", true));
         }
         ConferenceSourceMap sourcesAccepted;
         try
